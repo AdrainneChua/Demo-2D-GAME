@@ -32,7 +32,6 @@ public class Enemy : Character, IDamageable {
             StartCoroutine (HurtAnimDelay ());
             currentHealth -= Amount;
             if (currentHealth <= 0) {
-              
                 StartCoroutine (DeathAnimDelay ());
             }
         }
@@ -40,7 +39,6 @@ public class Enemy : Character, IDamageable {
 
     void Update () {
         HandleAI ();
-
     }
 
     private void HandleAI () {
@@ -61,7 +59,6 @@ public class Enemy : Character, IDamageable {
                     Animator.SetInteger ("AnimState", 2);
                     Rb2D.velocity = new Vector2 (speed, Rb2D.velocity.y);
                     transform.localScale = new Vector2 (-1, 1);
-
                 } else {
                     Rb2D.velocity = Vector3.zero;
                     HandleMeleeAttack ();
@@ -77,7 +74,6 @@ public class Enemy : Character, IDamageable {
         if (!isMeleeAttacking) {
             Animator.SetTrigger ("Attack");
             StartCoroutine (MeleeAttackAnimDelay ());
-
             Collider2D[] overlappedColliders = Physics2D.OverlapCircleAll (MeleeAttackOrigin.position, MeleeAttackRadius, layer);
             for (int i = 0; i < overlappedColliders.Length; i++) {
                 IDamageable enemyAttributes = overlappedColliders[i].GetComponent<IDamageable> ();
@@ -86,7 +82,6 @@ public class Enemy : Character, IDamageable {
                 }
             }
         }
-
     }
 
     private IEnumerator DeathAnimDelay () {
@@ -104,7 +99,6 @@ public class Enemy : Character, IDamageable {
     }
 
     private IEnumerator MeleeAttackAnimDelay () {
-        
         isMeleeAttacking = true;
         yield return new WaitForSeconds (MeleeAttackDelay);
         isMeleeAttacking = false;

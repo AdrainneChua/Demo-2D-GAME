@@ -14,22 +14,23 @@ public class Character : MonoBehaviour
     private Animator animator =null;
     public LayerMask ground;
 
-    
-
     public Rigidbody2D Rb2D
     {
         get {return rb2D;}
         protected set{rb2D = value;}
     }
+
      public float currentHealth
     {
         get {return CurrentHealth;}
         protected set{CurrentHealth = value;}
     }
+
     public Animator Animator{
         get {return animator;}
         protected set{animator = value;}
     }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,16 +43,10 @@ public class Character : MonoBehaviour
         CurrentHealth = HealthPool;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
      protected bool CheckGrounded(){
-         
         return Physics2D.Raycast(transform.position,-Vector2.up,groundedLeeway,ground);
-
     }
+    
      protected virtual void Die()
     {
         gameObject.SetActive(false);

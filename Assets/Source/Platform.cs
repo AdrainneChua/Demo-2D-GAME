@@ -32,24 +32,18 @@ public class Platform : MonoBehaviour
         Gizmos.DrawLine(pos1.position, pos2.position);
     }
 
-     private void OnTriggerEnter2D (Collider2D collision) {
-          
+     private void OnTriggerEnter2D (Collider2D collision) { 
         if (collision.gameObject.tag == "Player") {
            Debug.Log ("test1");
            collision.transform.SetParent(transform);
-
         }
-
     }
 
-    private void OnTriggerExit2D (Collider2D collision) {
-       
+    private void OnTriggerExit2D (Collider2D collision) {   
         if (collision.gameObject.tag == "Player") {
             Debug.Log ("test2");
            collision.transform.SetParent(null);
-
         }
-
     }
     
 }

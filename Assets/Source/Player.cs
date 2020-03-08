@@ -69,10 +69,7 @@ public class Player : Character, IDamageable {
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            
-           
                ApplyDamage(hurtForce);
-
                 if(collision.gameObject.transform.position.x > transform.position.x)
                 {
                     //Move to left when damaged
@@ -83,7 +80,6 @@ public class Player : Character, IDamageable {
                     //Move to right when damaged
                     Rb2D.velocity = new Vector2(hurtForce, Rb2D.velocity.y);
                 }
-            
         }
     }
 
@@ -109,37 +105,32 @@ public class Player : Character, IDamageable {
             if (!isMeleeAttacking) {
                 StartCoroutine (MeleeAttackAnimDelay ());
             }
-
         }
         if (attemptJump && CheckGrounded () || Rb2D.velocity.y > 1f) {
             if (!isMeleeAttacking) {
                 Animator.SetTrigger ("Jump");
             }
-
         }
         if (Mathf.Abs (moveIntentionX) > 0.1f && CheckGrounded ()) {
             Animator.SetInteger ("AnimState", 2);
         } else {
             Animator.SetInteger ("AnimState", 0);
         }
-
     }
 
     private IEnumerator MeleeAttackAnimDelay () {
-       
         isMeleeAttacking = true;
         yield return new WaitForSeconds (MeleeAttackDelay);
         isMeleeAttacking = false;
     }
+
     private void HandleJump () {
         if (attemptJump && CheckGrounded ()) {
             Rb2D.velocity = new Vector2 (Rb2D.velocity.x, jumpForce);
         }
-
     }
 
     private void HandleRun () {
-
         if (moveIntentionX > 0 && transform.rotation.y == 0 && !isMeleeAttacking) {
             Rb2D.velocity = new Vector2 (-speed, Rb2D.velocity.y);
             transform.localScale = new Vector2 (-1, 1);
